@@ -35,9 +35,18 @@ int main(int argc, char** argv)
 		cout << "There was no export filepath parameter entered. The export lock file will be saved to the default location." << endl;
 	}
 
+	//create a linked list
 	LinkedList list;
+	list.currentPosition = 5;
 
-	list.Add(1);
+	//add the default 0's to the list
+	for (int i = 1; i < 8; i++)
+	{
+		list.Add(0);
+	}
+	
+	cout << list;
+	
 
 	_getch();
 }

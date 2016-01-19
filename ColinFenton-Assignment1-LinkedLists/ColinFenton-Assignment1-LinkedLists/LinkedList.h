@@ -15,6 +15,7 @@ private:
 	Node *first;
 public:
 	LinkedList() : first(NULL) {};
+	int currentPosition;
 	virtual ~LinkedList();
 	bool empty() const;
 	void Add(int num);
@@ -25,5 +26,5 @@ public:
 	int RetrieveValue(int value);
 	int RetrievePosition(int nodenum);
 
-	/*friend ostream& operator <<(ostream &output, LinkedList& list);*/
+	friend ostream& operator <<(ostream &output, LinkedList& list);
 };

@@ -9,8 +9,8 @@ using namespace std;
 class Node
 {
 public:
-	int data;
+	int num;
 	Node *next;
 
-	Node() : next(NULL), data(-1) {}
+	Node() : next(NULL), num(-1) {}
 };

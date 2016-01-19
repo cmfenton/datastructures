@@ -9,7 +9,7 @@ using namespace std;
 class Node
 {
 public:
-	int data = 0;
+	int data;
 	Node *next;
 
 	Node() : next(NULL), data(-1) {}
