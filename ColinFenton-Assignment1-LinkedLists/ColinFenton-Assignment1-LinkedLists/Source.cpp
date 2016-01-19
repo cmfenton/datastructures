@@ -2,6 +2,8 @@
 #include <conio.h>
 #include <string.h>
 #include <regex>
+#include "LinkedList.h"
+#include "Node.h"
 
 using namespace std;
 
@@ -23,17 +25,19 @@ int main(int argc, char** argv)
 		else 
 		{
 			filePath = "C:\\Users\\NSCCSTUDENT\\Desktop\\datastructures\\datastructures\\ColinFenton - Assignment1 - LinkedLists\\Debug\\lock.txt";
-			cout << "The export filepath parameter was not valid. The exported lock file will be saved to the default location.";
+			cout << "The export filepath parameter was not valid. The exported lock file will be saved to the default location." << endl;
 		}
 	}
 	//if no argument is given, the file is saved to a default location
 	else
 	{
 		filePath = "C:\\Users\\NSCCSTUDENT\\Desktop\\datastructures\\datastructures\\ColinFenton - Assignment1 - LinkedLists\\Debug\\lock.txt";
-		cout << "There was no export filepath parameter entered. The export lock file will be saved to the default location.";
+		cout << "There was no export filepath parameter entered. The export lock file will be saved to the default location." << endl;
 	}
 
-	cout << filePath;
+	LinkedList list;
+
+	list.Add(1);
 
 	_getch();
 }
