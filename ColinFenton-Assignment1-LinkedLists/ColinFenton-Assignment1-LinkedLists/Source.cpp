@@ -37,7 +37,7 @@ int main(int argc, char** argv)
 
 	//create a linked list
 	LinkedList list;
-	list.currentPosition = 5;
+	list.currentPosition = 1;
 
 	//add the default 0's to the list
 	for (int i = 1; i < 8; i++)
@@ -45,8 +45,29 @@ int main(int argc, char** argv)
 		list.Add(0);
 	}
 	
+	//print out starting combination
+	cout << "Starting combination: " << endl;
 	cout << list;
 	
+
+	//recieve command
+	string commandInput;
+	while (true)
+	{
+		cout << "\nEnter a command: ";
+		getline(cin, commandInput);
+
+		//check command input
+
+		///////////
+		///Quit///
+		/////////
+		if (commandInput == "q" || commandInput == "Q" || commandInput == "QQ")
+		{
+			//close the program
+			exit(0);
+		}
+	}
 
 	_getch();
 }
