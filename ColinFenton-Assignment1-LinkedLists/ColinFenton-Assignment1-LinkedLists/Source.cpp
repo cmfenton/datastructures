@@ -7,11 +7,31 @@
 
 using namespace std;
 
+//////////////////////////////////////////////////////////
+///Seperates the input integer from the command letter///
+////////////////////////////////////////////////////////
+int splitCommand(string command)
+{
+	string delimiter = " ";
+	size_t pos = 0;
+	std::string token;
+	while ((pos = command.find(delimiter)) != std::string::npos) {
+		token = command.substr(0, pos);
+		command.erase(0, pos + delimiter.length());
+	}
+
+	return stoi(command);
+}
+
+/////////////////////
+///Implementation///
+///////////////////
 int main(int argc, char** argv) 
 {
 	string filePath;
 	regex validPath("^[A-Z][:][\\\\](.+[\\\\])(\\w+\\.txt)$");
-
+	regex validSubstitute("^[Ss][ ][0-9]$|^[Ss][ ][0-4][0-9]$");
+	regex validGoto("^[Gg][ ][1-7]$");
 	//check if an argument is given
 	if (argc > 1)
 	{
@@ -47,7 +67,7 @@ int main(int argc, char** argv)
 	
 	//print out starting combination
 	cout << "Starting combination: " << endl;
-	cout << list;
+	cout << list << endl;
 	
 
 	//recieve command
@@ -62,10 +82,47 @@ int main(int argc, char** argv)
 		///////////
 		///Quit///
 		/////////
-		if (commandInput == "q" || commandInput == "Q" || commandInput == "QQ")
+		if (commandInput == "q" || commandInput == "Q")
 		{
 			//close the program
 			exit(0);
+		}
+		///////////
+		///Exit///
+		/////////
+		else if (commandInput == "e" || commandInput == "E")
+		{
+			//save the lock to a text file
+
+			//close the program
+			exit(0);
+		}
+		///////////
+		///Goto///
+		/////////
+		else if (regex_match(commandInput, validGoto))
+		{
+			//G or g followed by a number from 1 to 7
+			//split at space in commandInput and convert to int	
+			int gotoNum = splitCommand(commandInput);
+			
+			//set position
+			list.currentPosition = gotoNum;
+			//reprint the display		
+			system("cls");
+			cout << "Current Combination: " << endl;
+			cout << list << endl;
+		}
+		/////////////////
+		///Substitute///
+		///////////////
+		else if (regex_match(commandInput, validSubstitute))
+		{
+			//S or s followed by 0 - 49
+			int insertNum = splitCommand(commandInput);
+			list.InsertAtPosition(list.currentPosition, insertNum);
+
+			cout << list << endl;
 		}
 	}
 

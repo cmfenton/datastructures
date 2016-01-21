@@ -30,18 +30,23 @@ bool LinkedList::empty() const
 ///////////////////////////////////////////
 void LinkedList::Add(int num)
 {
+	//create a node object
 	Node *node = new Node();
+	//assign the number value
 	node->num = num;
 
+	//add it to the end of the linked list
+	//if there is no first value in the list, add it to the beginning
 	if (first == NULL)
 	{
 		first = node;
-	}
+	}	
 	else
 	{
 		Node *currNode = first;
 		Node *prevNode = NULL;
 
+		//else, loop until the end of the list
 		while (currNode != NULL)
 		{
 			prevNode = currNode;
@@ -50,6 +55,7 @@ void LinkedList::Add(int num)
 
 		if (prevNode != NULL)
 		{
+			//add the node to the list
 			prevNode->next = node;
 		}
 	}
@@ -81,6 +87,37 @@ void LinkedList::InsertAfterValue(int value, int num)
 ///////////////////////////////////////////////
 void LinkedList::InsertAtPosition(int nodenum, int num)
 {
+	int index = -1;
+
+	Node *node = first;
+	Node *prev = NULL;
+
+	while (node != NULL)
+	{
+		index++;
+
+		if (index == nodenum)
+		{
+			break;
+		}
+
+		prev = node;
+		node = node->next;
+	}
+
+	if (index >= 0)
+	{
+		if (node == first)
+		{
+			first = node->next;
+		}
+		else
+		{
+			prev->next = node->next;
+		}
+
+		node->num = num;
+	}
 }
 
 ////////////////////////////////
