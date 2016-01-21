@@ -64,15 +64,36 @@ void LinkedList::Add(int num)
 //////////////////////////////
 ///Delete a specific value///
 ////////////////////////////
-void LinkedList::DeleteValue(int value)
+void LinkedList::DeleteAtValue(int value)
 {
 }
 
 ////////////////////////////////////
 ///Delete at a specific position///
 //////////////////////////////////
-void LinkedList::DeletePosition(int nodenum)
+void LinkedList::DeleteAtPosition(int nodenum)
 {
+	int index = -1;
+	nodenum--;
+	Node *node = first;
+
+	//loop through until 
+	while (node != NULL)
+	{
+		index++;
+
+		if (index == nodenum)
+		{
+			break;
+		}
+
+		node = node->next;
+	}
+
+	if (index >= 0)
+	{
+		node->num = 0;
+	}
 }
 
 /////////////////////////////////////////////////
@@ -88,34 +109,26 @@ void LinkedList::InsertAfterValue(int value, int num)
 void LinkedList::InsertAtPosition(int nodenum, int num)
 {
 	int index = -1;
-
+	nodenum--;
 	Node *node = first;
-	Node *prev = NULL;
 
+	//start at first node, loop until the node number = the index
 	while (node != NULL)
 	{
 		index++;
 
 		if (index == nodenum)
 		{
+			//when found, break
 			break;
 		}
 
-		prev = node;
 		node = node->next;
 	}
 
 	if (index >= 0)
 	{
-		if (node == first)
-		{
-			first = node->next;
-		}
-		else
-		{
-			prev->next = node->next;
-		}
-
+		//assign the input number to the node that was found
 		node->num = num;
 	}
 }

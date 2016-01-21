@@ -119,9 +119,15 @@ int main(int argc, char** argv)
 		else if (regex_match(commandInput, validSubstitute))
 		{
 			//S or s followed by 0 - 49
+			//split at space in commandInput and convert to int	
 			int insertNum = splitCommand(commandInput);
+
+			//set the new number at the current position
 			list.InsertAtPosition(list.currentPosition, insertNum);
 
+			//reprint the display
+			system("cls");
+			cout << "Current Combination: " << endl;
 			cout << list << endl;
 		}
 	}

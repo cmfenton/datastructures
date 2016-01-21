@@ -19,8 +19,8 @@ public:
 	virtual ~LinkedList();
 	bool empty() const;
 	void Add(int num);
-	void DeleteValue(int value);
-	void DeletePosition(int nodenum);
+	void DeleteAtValue(int value);
+	void DeleteAtPosition(int nodenum);
 	void InsertAfterValue(int value, int num);
 	void InsertAtPosition(int nodenum, int num);
 	int RetrieveValue(int value);
