@@ -24,7 +24,7 @@ public:
 	void InsertAfterValue(int value, int num);
 	void InsertAtPosition(int nodenum, int num);
 	int RetrieveValue(int value);
-	int RetrievePosition(int nodenum);
+	int RetrieveAtPosition(int nodenum);
 	int splitCommand(string command);
 
 	friend ostream& operator <<(ostream &output, LinkedList& list);

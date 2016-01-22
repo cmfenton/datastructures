@@ -22,7 +22,14 @@ LinkedList::~LinkedList(){}
 ///////////////////////////////
 bool LinkedList::empty() const
 {
-	return false;
+	if (this->first == NULL)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 /////////////////////////////////////////////
@@ -66,6 +73,36 @@ void LinkedList::Add(int num)
 ////////////////////////////
 void LinkedList::DeleteAtValue(int value)
 {
+	Node *node = first;
+	Node *prev = NULL;
+
+	//loop through the nodes
+	while (node != NULL)
+	{
+		//check if the value at that node is equal to the input value
+		if (node->num == value)
+		{
+			break;
+		}
+
+		prev = node;
+		node = node->next;
+	}
+
+	//if it's found, delete it
+	if (node != NULL)
+	{
+		if (node == first)
+		{
+			first = node->next;
+		}
+		else
+		{
+			prev->next = node->next;
+		}
+
+		delete node;
+	}
 }
 
 ////////////////////////////////////
@@ -77,7 +114,7 @@ void LinkedList::DeleteAtPosition(int nodenum)
 	nodenum--;
 	Node *node = first;
 
-	//loop through until 
+	//loop through until the position matches the input node number
 	while (node != NULL)
 	{
 		index++;
@@ -90,6 +127,7 @@ void LinkedList::DeleteAtPosition(int nodenum)
 		node = node->next;
 	}
 
+	
 	if (index >= 0)
 	{
 		node->num = 0;
@@ -101,6 +139,41 @@ void LinkedList::DeleteAtPosition(int nodenum)
 ///////////////////////////////////////////////
 void LinkedList::InsertAfterValue(int value, int num)
 {
+	Node *node = new Node();
+	node->num = num;
+
+	// search for node to insert after
+	Node *prev = first;
+
+	while (prev != NULL)
+	{
+		if (prev->num == value)
+		{
+			break;
+		}
+
+		prev = prev->next;
+	}
+
+	// insert node into list
+	if (first == NULL)
+	{
+		first = node;
+	}
+	else
+	{
+		if (prev != NULL)
+		{
+			node->next = prev->next;
+			prev->next = node;
+		}
+		else
+		{
+			// could not find the node to insert after
+			// so defaulting to Add function
+			Add(num);
+		}
+	}
 }
 
 /////////////////////////////////////////////////
@@ -138,15 +211,56 @@ void LinkedList::InsertAtPosition(int nodenum, int num)
 //////////////////////////////
 int LinkedList::RetrieveValue(int value)
 {
-	return 0;
+	Node *node = first;
+	Node *prev = NULL;
+
+	//loop through the nodes
+	while (node != NULL)
+	{
+		//check if the value at that node is equal to the input value
+		if (node->num == value)
+		{
+			break;
+		}
+
+		prev = node;
+		node = node->next;
+	}
+
+	//if it's found, return it
+	if (node != NULL)
+	{
+		return node->num;
+	}
 }
 
 ///////////////////////////////////////////////////
 ///Retrieve a value at a specific node position///
 /////////////////////////////////////////////////
-int LinkedList::RetrievePosition(int nodenum)
+int LinkedList::RetrieveAtPosition(int nodenum)
 {
-	return 0;
+	int index = -1;
+	nodenum--;
+	Node *node = first;
+
+	//loop through until the position matches the input node number
+	while (node != NULL)
+	{
+		index++;
+
+		if (index == nodenum)
+		{
+			break;
+		}
+
+		node = node->next;
+	}
+
+	//return the number at the position
+	if (index >= 0)
+	{
+		return node->num;
+	}
 }
 
 //////////////////////////////////////////////////////////
