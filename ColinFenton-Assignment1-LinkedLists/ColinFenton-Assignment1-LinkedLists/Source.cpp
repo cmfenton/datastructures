@@ -7,20 +7,14 @@
 
 using namespace std;
 
-//////////////////////////////////////////////////////////
-///Seperates the input integer from the command letter///
-////////////////////////////////////////////////////////
-int splitCommand(string command)
+//////////////////////////////////////////
+///Function to reprint the combination///
+////////////////////////////////////////
+void reprint(LinkedList list)
 {
-	string delimiter = " ";
-	size_t pos = 0;
-	std::string token;
-	while ((pos = command.find(delimiter)) != std::string::npos) {
-		token = command.substr(0, pos);
-		command.erase(0, pos + delimiter.length());
-	}
-
-	return stoi(command);
+	system("cls");
+	cout << "Current Combination: " << endl;
+	cout << list << endl;
 }
 
 /////////////////////
@@ -104,14 +98,13 @@ int main(int argc, char** argv)
 		{
 			//G or g followed by a number from 1 to 7
 			//split at space in commandInput and convert to int	
-			int gotoNum = splitCommand(commandInput);
+			int gotoNum = list.splitCommand(commandInput);
 			
 			//set position
 			list.currentPosition = gotoNum;
+
 			//reprint the display		
-			system("cls");
-			cout << "Current Combination: " << endl;
-			cout << list << endl;
+			reprint(list);
 		}
 		/////////////////
 		///Substitute///
@@ -120,15 +113,38 @@ int main(int argc, char** argv)
 		{
 			//S or s followed by 0 - 49
 			//split at space in commandInput and convert to int	
-			int insertNum = splitCommand(commandInput);
+			int insertNum = list.splitCommand(commandInput);
 
 			//set the new number at the current position
 			list.InsertAtPosition(list.currentPosition, insertNum);
 
 			//reprint the display
-			system("cls");
-			cout << "Current Combination: " << endl;
-			cout << list << endl;
+			reprint(list);
+		}
+		/////////////
+		///Delete///
+		///////////
+		else if (commandInput == "d" || commandInput == "D")
+		{
+			//'delete' the number by changing it to 0
+			list.DeleteAtPosition(list.currentPosition);
+
+			//reprint the display
+			reprint(list);
+		}
+		////////////
+		///Reset///
+		//////////
+		else if (commandInput == "r" || commandInput == "R")
+		{
+			//'delete' all number by changing all to 0
+			for (int i = 1; i < 8; i++)
+			{
+				list.DeleteAtPosition(i);
+			}
+
+			//reprint the display
+			reprint(list);
 		}
 	}
 

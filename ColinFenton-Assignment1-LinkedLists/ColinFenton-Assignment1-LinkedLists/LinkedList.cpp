@@ -149,6 +149,22 @@ int LinkedList::RetrievePosition(int nodenum)
 	return 0;
 }
 
+//////////////////////////////////////////////////////////
+///Seperates the input integer from the command letter///
+////////////////////////////////////////////////////////
+int LinkedList::splitCommand(string command)
+{
+	string delimiter = " ";
+	size_t pos = 0;
+	std::string token;
+	while ((pos = command.find(delimiter)) != std::string::npos) {
+		token = command.substr(0, pos);
+		command.erase(0, pos + delimiter.length());
+	}
+
+	return stoi(command);
+}
+
 /////////////////////////////////////////////////
 ///Custom output for items in the linked list///
 ///////////////////////////////////////////////
