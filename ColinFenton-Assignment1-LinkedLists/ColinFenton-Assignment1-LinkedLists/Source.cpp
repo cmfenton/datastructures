@@ -8,15 +8,19 @@
 #include "Node.h"
 
 using namespace std;
+///////////////////////////////////////
+///Driver File For Combination Lock///
+/////////////////////////////////////
 
 //////////////////////////////////////////
 ///Function to reprint the combination///
 ////////////////////////////////////////
-void reprint(LinkedList list)
+void printDisplay(LinkedList list)
 {
 	system("cls");
-	cout << "Current Combination: " << endl;
+	cout << "Current Combination: \n" << endl;
 	cout << list << endl;
+	cout << "\nPress H for Help.";
 }
 
 /////////////////
@@ -52,14 +56,14 @@ int main(int argc, char** argv)
 		else 
 		{
 			filePath = "C:\\Users\\NSCCSTUDENT\\Desktop\\datastructures\\datastructures\\ColinFenton - Assignment1 - LinkedLists\\Debug\\lock.txt";
-			cout << "The export filepath parameter was not valid. The exported lock file will be saved to the default location." << endl;
+			cout << "**The export filepath parameter was not valid. The exported lock file will be saved to the default location.**" << endl;
 		}
 	}
 	//if no argument is given, the file is saved to a default location
 	else
 	{
 		filePath = "C:\\Users\\NSCCSTUDENT\\Desktop\\datastructures\\datastructures\\ColinFenton - Assignment1 - LinkedLists\\Debug\\lock.txt";
-		cout << "There was no export filepath parameter entered. The export lock file will be saved to the default location." << endl;
+		cout << "**There was no export filepath parameter entered. The export lock file will be saved to the default location.**" << endl;
 	}
 
 	//create a linked list
@@ -73,14 +77,12 @@ int main(int argc, char** argv)
 	}
 	
 	//print out starting combination
-	cout << "Starting combination: " << endl;
-	cout << list << endl;
-	
+	printDisplay(list);
 
 	//recieve command
 	string commandInput;
 	while (true)
-	{
+	{		
 		cout << "\nEnter a command: ";
 		getline(cin, commandInput);
 
@@ -142,7 +144,7 @@ int main(int argc, char** argv)
 			list.currentPosition = gotoNum;
 
 			//reprint the display		
-			reprint(list);
+			printDisplay(list);
 		}
 		/////////////////
 		///Substitute///
@@ -157,7 +159,7 @@ int main(int argc, char** argv)
 			list.InsertAtPosition(list.currentPosition, insertNum);
 
 			//reprint the display
-			reprint(list);
+			printDisplay(list);
 		}
 		/////////////
 		///Delete///
@@ -168,7 +170,7 @@ int main(int argc, char** argv)
 			list.DeleteAtPosition(list.currentPosition);
 
 			//reprint the display
-			reprint(list);
+			printDisplay(list);
 		}
 		////////////
 		///Reset///
@@ -182,7 +184,34 @@ int main(int argc, char** argv)
 			}
 
 			//reprint the display
-			reprint(list);
+			printDisplay(list);
+		}
+		///////////
+		///Help///
+		/////////
+		else if (commandInput == "h" || commandInput == "H")
+		{
+			cout << endl;
+			cout << "---Help---" << endl;
+			cout << endl;
+			cout << "---Basic Information---" << endl;
+			cout << endl;
+			cout << "The values of the numbers can be changed, but the direction (R or L) always alternates and always starts with R." << endl;
+			cout << "The combination value highlighted in green is the currently selected value. Substitute and Delete commands will affect \nthis value." << endl;
+			cout << endl;
+			cout << "--Commands---" << endl;
+			cout << endl;
+			cout << "Name / Command / Usage" << endl;
+			cout << "Goto / 'G #' (where # = 1 to 7) / Use this command to change which lock value is highlighted." << endl;
+			cout << "Substitute / 'S #' (where # = 0 to 49) / Use this command to change the lock value at the highligted position." << endl;
+			cout << "Delete / 'D' / Use this command to delete the lock value at the highlighted position, setting it back to 0." << endl;
+			cout << "Reset / 'R' / Use this command to delete all 7 lock values, setting them all back to 0." << endl;
+			cout << "Exit / 'E' / Use this command to exit the program and write the current combination to a text file." << endl;
+			cout << "Quit / 'Q' / Use this command to exit the program without saving the current combination to a text file." << endl;
+		}
+		else
+		{
+			cout << "Invalid Command \"" << commandInput << "\", Press H for Help." << endl;
 		}
 	}
 

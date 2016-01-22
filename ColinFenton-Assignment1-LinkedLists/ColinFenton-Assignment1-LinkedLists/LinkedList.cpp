@@ -289,42 +289,44 @@ ostream & operator<<(ostream & output, LinkedList& list)
 	HANDLE hConsole;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
+	output << "|";
+
 	//until the end of the list
 	while (currNode != NULL)
 	{
-		
-	
 		//check if odd or even
 
 		//if even
 		if (count % 2 == 0)
 		{
+			output << "|";
 			//check if the current node is the current selected position in the console
 			if (list.currentPosition == count)
-			{
+			{				
 				//change the colour
-				SetConsoleTextAttribute(hConsole, 23);
+				SetConsoleTextAttribute(hConsole, 47);
 			}
 			//put an L in front and output the number stored in this node
-			output << "L" << currNode->num;
+			output << " L" << currNode->num << " ";
 			//change the colour back (in case it had changed)
 			SetConsoleTextAttribute(hConsole, 7);
-			output << " ";
+			output << "|";
 		}
 		//if odd
 		else
 		{
+			output << "|";
 			//check if the current node is the current selected position in the console
 			if (list.currentPosition == count)
 			{
 				//change the colour
-				SetConsoleTextAttribute(hConsole, 23);
+				SetConsoleTextAttribute(hConsole, 47);
 			}
 			//put an R in front and output the number stored in this node
-			output << "R" << currNode->num;
+			output << " R" << currNode->num << " ";;
 			//change the colour back to default (in case it had changed)
 			SetConsoleTextAttribute(hConsole, 7);
-			output << " ";
+			output << "|";
 		}
 
 		//check if the current node is the current position
@@ -335,5 +337,6 @@ ostream & operator<<(ostream & output, LinkedList& list)
 		count++;
 	}
 
+	output << "|";
 	return output;
 }
