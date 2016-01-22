@@ -2,6 +2,8 @@
 #include <conio.h>
 #include <string.h>
 #include <regex>
+#include <fstream>
+#include <cstdlib>
 #include "LinkedList.h"
 #include "Node.h"
 
@@ -16,6 +18,17 @@ void reprint(LinkedList list)
 	cout << "Current Combination: " << endl;
 	cout << list << endl;
 }
+
+/////////////////
+///Exception///
+///////////////
+struct FileOpenException : public exception
+{
+	const char * what() const throw ()
+	{
+		return "File Could Not Be Opened or Doesn't Exist";
+	}
+};
 
 /////////////////////
 ///Implementation///
@@ -87,9 +100,34 @@ int main(int argc, char** argv)
 		else if (commandInput == "e" || commandInput == "E")
 		{
 			//save the lock to a text file
+			
+			//try to open a file
+			try 
+			{
+				//will erase data if file already exists, then write new data
+				ofstream lockFile(filePath, ios::trunc);
 
-			//close the program
-			exit(0);
+				if (lockFile.fail())
+				{
+					throw FileOpenException();
+				}		
+				
+				//write the combination to the file
+				lockFile << list;
+
+				cout << "Lock file saved to " << filePath << endl << "Press enter to exit." << endl;
+
+				_getch();
+
+				//close the program
+				lockFile.close();
+				exit(0);
+			}
+			catch (FileOpenException &e)
+			{
+				cout << "Exception caught" << endl;
+				cout << e.what() << endl;			
+			}					
 		}
 		///////////
 		///Goto///
